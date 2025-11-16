@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \"Move-Item setup.MD setup.md -Force; Write-Host ''Renamed setup.MD to setup.md''\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

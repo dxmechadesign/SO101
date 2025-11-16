@@ -108,4 +108,4 @@ python scripts\disable_torque.py --type follower --port COM4
 ## キャリブレーションについて
 
 これらのスクリプトを使用する前に、アームのキャリブレーションが完了している必要があります。
-キャリブレーション方法は、プロジェクトルートの[setup.MD](../setup.MD)を参照してください。
+キャリブレーション方法は、プロジェクトルートの[setup.md](../setup.md)を参照してください。

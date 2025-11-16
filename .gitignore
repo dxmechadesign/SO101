@@ -1,0 +1,58 @@
+# Python仮想環境
+.venv/
+venv/
+env/
+ENV/
+
+# Pythonキャッシュ
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# テスト・カバレッジ
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE設定
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS固有
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ログファイル
+*.log
+
+# 環境変数（秘密情報を含む可能性）
+.env
+.env.local
+
+# ビルド・配布
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# LeRobot固有
+# キャリブレーションファイル（ユーザー固有なので除外推奨）
+# ただし、サンプルとして含めたい場合はコメントアウト
+# .cache/
+
+# データセット（容量が大きいため）
+data/
+datasets/
+*.hdf5
+*.zarr
+
+# 一時ファイル
+tmp/
+temp/

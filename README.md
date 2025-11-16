@@ -20,72 +20,50 @@ SO-101は、リーダーアーム（操作側）とフォロワーアーム（�
 
 ## クイックスタート
 
-### 1. 必要なツールのインストール
+SO-101ロボットアームのセットアップとテレオペレーションまでの流れは以下の通りです。
+
+### セットアップ手順
+
+詳細な手順は **[setup.md](setup.md)** を参照してください。
+
+1. **ツールのインストール** - uv、FFmpegをインストール
+2. **依存関係のインストール** - `uv sync`で自動セットアップ
+3. **ファームウェア更新** - Feetech公式ソフトウェアで更新
+4. **モーターID設定** - リーダー・フォロワー各6個のモーターIDを設定
+5. **キャリブレーション** - 両アームのキャリブレーション実行
+6. **テレオペレーション** - リーダーアームでフォロワーアームを制御
+
+### 最小限のコマンド例
 
 ```powershell
-# uv（Pythonパッケージマネージャー）
-powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# 1. 依存関係のインストール
+uv sync
 
-# FFmpeg（動画処理）
-winget install --id=Gyan.FFmpeg -e
-```
-
-### 2. プロジェクトのセットアップ
-
-```powershell
-# リポジトリのクローン
-git clone <リポジトリURL>
-cd SO101
-
-# 依存関係のインストール
-powershell -Command "[Environment]::SetEnvironmentVariable('GIT_LFS_SKIP_SMUDGE', '1', 'Process'); uv sync"
-
-# 仮想環境の有効化
+# 2. 仮想環境の有効化
 .venv\Scripts\Activate.ps1
-```
 
-### 3. ファームウェア更新とモーターID設定
-
-Feetech公式ソフトウェア（FD.exe）を使用して：
-1. サーボファームウェアを3.9→3.10に更新
-2. モーターIDを1～6に設定（リーダー・フォロワー各6個）
-
-詳細は[setup.MD](setup.MD)の「4. サーボモーターのファームウェア更新とID設定」を参照してください。
-
-### 4. キャリブレーション
-
-**リーダーアーム:**
-```powershell
+# 3. リーダーアームのキャリブレーション
 python -m lerobot.scripts.lerobot_calibrate --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=my_awesome_leader_arm
-```
 
-**フォロワーアーム:**
-```powershell
+# 4. フォロワーアームのキャリブレーション
 python -m lerobot.scripts.lerobot_calibrate --robot.type=so101_follower --robot.port=COM4 --robot.id=my_awesome_follower_arm
-```
 
-### 5. テレオペレーションの実行
-
-```powershell
-python -m lerobot.scripts.lerobot_teleoperate `
-  --robot.type=so101_follower `
-  --robot.port=COM4 `
-  --robot.id=my_awesome_follower_arm `
-  --robot.cameras='{}' `
-  --teleop.type=so101_leader `
-  --teleop.port=COM3 `
-  --teleop.id=my_awesome_leader_arm `
+# 5. テレオペレーション実行
+python -m lerobot.scripts.lerobot_teleoperate \
+  --robot.type=so101_follower --robot.port=COM4 --robot.id=my_awesome_follower_arm \
+  --robot.cameras='{}' \
+  --teleop.type=so101_leader --teleop.port=COM3 --teleop.id=my_awesome_leader_arm \
   --display_data=false
 ```
 
-リーダーアームを動かすと、フォロワーアームが同じ動きをします！
+**⚠️ 重要**: 上記は最小限の例です。ファームウェア更新やモーターID設定など、必須の手順は **[setup.md](setup.md)** で確認してください。
 
 ## プロジェクト構成
 
 ```
 SO101/
 ├── README.md              # このファイル
-├── setup.MD               # 詳細なセットアップガイド
+├── setup.md               # 詳細なセットアップガイド
 ├── pyproject.toml         # Pythonプロジェクト設定
 ├── .venv/                 # Python仮想環境
 └── scripts/               # テスト・ユーティリティスクリプト
@@ -98,7 +76,7 @@ SO101/
 
 ## ドキュメント
 
-- **[setup.MD](setup.MD)**: 完全なセットアップガイド
+- **[setup.md](setup.md)**: 完全なセットアップガイド
   - ツールのインストール
   - ファームウェア更新
   - モーターID設定
